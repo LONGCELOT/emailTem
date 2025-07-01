@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Template Editor</title>
+  <link rel="stylesheet" href="./style/style.css" />
+</head>
+<body>
+  <div class="main-container">
+    <!-- Email Template Form Section -->
+    <div class="email-template-section">
+      <h2 class="section-title">Email Template</h2>
+      
+      <!-- Applicant Variables Section -->
+      <div class="variables-section">
+        <h3 class="subsection-title">Applicant Data (From System)</h3>
+        <p class="subsection-description">These will be automatically filled from student records</p>
+        
+        <div class="variable-item">
+          <span class="variable-tag">{{applicantName}}</span>
+          <span class="variable-description">Student's Full Name</span>
+        </div>
+        
+        <div class="variable-item">
+          <span class="variable-tag">{{emailSubject}}</span>
+          <span class="variable-description">Email Subject Line</span>
+        </div>
+        
+        <div class="variable-item">
+          <span class="variable-tag">{{major}}</span>
+          <span class="variable-description">Applied Program/Major</span>
+        </div>
+        
+        <div class="variable-item">
+          <span class="variable-tag">{{scholarshipPercentage}}</span>
+          <span class="variable-description">Scholarship Amount (%)</span>
+        </div>
+      </div>
+
+      <!-- Admin Input Section -->
+      <div class="admin-inputs-section">
+        <h3 class="subsection-title">Admin Input</h3>
+        <p class="subsection-description">these details will be insert all emails</p>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entrance Exam Date</label>
+            <input id="examDate" type="text" value="June 1, 2025" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Confirmation Deadline</label>
+            <input id="confirmDate" type="text" value="By June 15, 2025, 8:00 AM - 12:00 PM" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Contact Phone</label>
+            <input id="contactPhone" type="text" value="(123) 456-7890" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>School Location Link</label>
+            <input id="locationLink" type="text" value="https://maps.example.com/school-location" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>General Form Link</label>
+            <input id="formLink" type="text" value="https://example.com/application-form" />
+          </div>
+        </div>
+      </div>
+
+      <button class="generate-btn" onclick="generateEmail()">Generate Email Template</button>
+    </div>
+
+    <!-- Email Editor Section -->
+    <div class="email-editor-section">
+      <div class="email-header">
+        <span class="email-subject-display">Email Template Preview</span>
+      </div>
+      
+      <div class="email-toolbar">
+        <!-- Text Formatting -->
+        <button class="toolbar-btn" onclick="formatText('bold')" title="Bold">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 4h8a4 4 0 0 1 4 4 3.5 3.5 0 0 1-1 2.5A4 4 0 0 1 18 15H6z"/>
+            <path d="M6 9h9"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('italic')" title="Italic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="4" x2="10" y2="4"/>
+            <line x1="14" y1="20" x2="5" y2="20"/>
+            <line x1="15" y1="4" x2="9" y2="20"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('underline')" title="Underline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"/>
+            <line x1="4" y1="21" x2="20" y2="21"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('foreColor')" title="Text Color">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 20h16"/>
+            <path d="M6 16l6-12 6 12"/>
+            <path d="M8 12h8"/>
+          </svg>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Font and Size -->
+        <button class="toolbar-btn font-selector" onclick="showFontMenu()" title="Font">
+          <span style="font-weight: 500;">Sans Serif</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn size-selector" onclick="showSizeMenu()" title="Font Size">
+          <span style="font-weight: 500;">TT</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9"/>
+          </svg>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Lists -->
+        <button class="toolbar-btn" onclick="formatText('insertUnorderedList')" title="Bullet List">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('insertOrderedList')" title="Numbered List">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="10" y1="6" x2="21" y2="6"/>
+            <line x1="10" y1="12" x2="21" y2="12"/>
+            <line x1="10" y1="18" x2="21" y2="18"/>
+            <path d="M4 6h1v4"/>
+            <path d="M4 10h2"/>
+            <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/>
+          </svg>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Alignment -->
+        <button class="toolbar-btn" onclick="formatText('justifyLeft')" title="Align Left">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="21" y1="6" x2="3" y2="6"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+            <line x1="17" y1="18" x2="3" y2="18"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('justifyCenter')" title="Center Align">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="21" y1="6" x2="3" y2="6"/>
+            <line x1="17" y1="12" x2="7" y2="12"/>
+            <line x1="19" y1="18" x2="5" y2="18"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="formatText('justifyRight')" title="Align Right">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="21" y1="6" x2="3" y2="6"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+            <line x1="21" y1="18" x2="7" y2="18"/>
+          </svg>
+        </button>
+        
+        <div class="toolbar-separator"></div>
+        
+        <!-- Special Functions -->
+        <button class="toolbar-btn" onclick="formatText('createLink')" title="Insert Link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="insertVariable()" title="Insert Variable">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <path d="M9 9h6v6"/>
+            <path d="M9 15l6-6"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="insertImage()" title="Insert Image">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+        </button>
+        
+        <button class="toolbar-btn" onclick="showMoreOptions()" title="More Options">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="1"/>
+            <circle cx="19" cy="12" r="1"/>
+            <circle cx="5" cy="12" r="1"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div id="emailEditor" class="email-content" contenteditable="true"></div>
+    </div>
+  </div>
+  <script src="./style/script.js"></script>
+</body>
+</html>
