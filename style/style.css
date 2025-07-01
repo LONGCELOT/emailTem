@@ -29,6 +29,37 @@ body {
   height: fit-content;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
+  direction: rtl; /* Right-to-left to move scrollbar to left */
+}
+
+/* Reset text direction back to normal inside the section */
+.email-template-section > * {
+  direction: ltr;
+}
+
+/* Custom scrollbar styles */
+.email-template-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.email-template-section::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.email-template-section::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+.email-template-section::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+/* Firefox scrollbar */
+.email-template-section {
+  scrollbar-width: thin;
+  scrollbar-color: #7b7b7b #f1f1f1;
 }
 
 .section-title {
@@ -91,23 +122,50 @@ body {
 }
 
 .generate-btn {
-  width: 100%;
+  flex: 1;
   background: #1e3a8a;
   color: white;
   border: none;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 8px;
 }
 
 .generate-btn:hover {
-  background: #000000;
+  background: #1e40af;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+/* Clear button styling */
+.clear-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.4);
+  color: black;
+  border: 3px solid #1e3a8a;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  background: #1e3a8a;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+/* Button group styling */
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 /* Email Editor Section */
@@ -323,9 +381,22 @@ body {
 .admin-inputs-section {
   margin-bottom: 24px;
   padding: 16px;
-  background: #fefefe;
+  background: #f8fafc;
   border-radius: 8px;
   border-left: 4px solid #1e3a8a;
+}
+
+/* Email Type Selection Section */
+.email-type-section {
+  margin-bottom: 32px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #1e3a8a;
+}
+
+.email-type-section .subsection-title {
+  color: #1e3a8a;
 }
 
 /* Toolbar separator line */
@@ -340,6 +411,35 @@ body {
   width: 18px;
   height: 18px;
   stroke-width: 1.5;
+}
+
+/* Send Email Button */
+.send-email-btn {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.send-email-btn:hover {
+  background: #2951bc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+.send-email-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
 }
 
 /* Responsive design */
